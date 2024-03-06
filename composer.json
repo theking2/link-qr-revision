@@ -9,7 +9,7 @@
     },
     "autoload": {
         "psr-4": {
-            "LinkQr\\": "D:/Projekten/theking2/Kingsoft/link-qr-revision/discovered/LinkQr/"
+            "LinkQr\\": "./classes/LinkQr",
         }
     }
 }
