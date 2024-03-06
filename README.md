@@ -103,8 +103,5 @@ CREATE FUNCTION `set_url` (`the_user_id` INT, `the_url` VARCHAR(4096))
 DELIMITER ;
 
 ```
-![image](https://github.com/theking2/link-qr-revision/assets/1612152/7bc6d054-c04d-48a2-adb4-e7b5cfd03d4b)
-
-
 Watch live on [go321.eu](https://go321.eu) or[go321.ch](https://go321.ch)
 
