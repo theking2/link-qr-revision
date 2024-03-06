@@ -58,7 +58,6 @@ if( array_key_exists( 'url', $_GET ) and ( false === strpos( $_GET['url'], BASE_
 		$select = Database::getConnection()->prepare( 'select set_url(:user_id, :url)' );
 		$select->execute( [ 'url' => $full_url, 'user_id' => $_SESSION['user_id'] ] );
 
-		//echo $select-> errorInfo()[2];
 		if( $code = $select->fetchColumn() ) {
 			$url = BASE_URL . $code;
 		} else {
