@@ -1,0 +1,15 @@
+{
+    "require": {
+        "monolog/monolog": "^3.5",
+        "kingsoft/utils": "^2.7",
+        "kingsoft/db": "^2.7",
+        "kingsoft/persist-db": "^2.7",
+        "kingsoft/persist-rest": "^1.2",
+        "kingsoft/monolog-handler": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LinkQr\\": "D:/Projekten/theking2/Kingsoft/link-qr-revision/discovered/LinkQr/"
+        }
+    }
+}
