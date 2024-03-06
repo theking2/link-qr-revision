@@ -30,8 +30,9 @@ if( array_key_exists( 'code', $_GET ) ) {
  * so we are going to show the main page
  */
 use \Kingsoft\Utils\Html;
+
 define( 'BASE_URL',
-	( $_SERVER['HTTPS'] ? 'https://' : 'http://' ) .
+	( ( array_key_exists( 'HTTPS', $_SERVER ) ) ? 'https://' : 'http://' ) .
 	$_SERVER['HTTP_HOST'] .
 	'/'
 );
