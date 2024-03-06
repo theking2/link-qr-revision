@@ -37,7 +37,7 @@ if( isset( $_POST['action'] ) ) {
 
 	} else {
 		// logon failed
-		LOG->notice( 'Logon failed', [ 'username' => $_POST['username'], 'attempt' => $_SESSION['failed attempt'] ] );
+		LOG->notice( 'Logon failed', [ 'username' => $_POST['username', 'attempt'=> $_SESSION['failed attempt']??0 ] );
 		header( 'Location: ./' );
 		error_log( '[' . date( 'Y-m-d H:i:s' ) . '] ' . __FILE__ . ':' . __LINE__ . ':Logon error for user ' . $_POST['username'] );
 		exit();
