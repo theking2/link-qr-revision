@@ -41,7 +41,9 @@ if( isset($_POST['action']) ) {
 require_once "../inc/header.inc.php";?>
 <main>
 
-  <h1>go321</h1>
+	<h1>
+		<?= SETTINGS['app']['name'] ?>
+	</h1>
   <h2>Konto erstellen</h2>
   <dialog open>
   <form method="post" id="form-container">

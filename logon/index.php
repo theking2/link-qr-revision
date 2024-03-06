@@ -3,18 +3,24 @@
 define( 'ROOT', $_SERVER['DOCUMENT_ROOT'] . '/' );
 define( 'SETTINGS_FILE', ROOT . 'config/settings.ini' );
 require ROOT . 'vendor/kingsoft/utils/settings.inc.php';
+require ROOT . 'vendor/autoload.php';
+require ROOT . 'inc/logger.inc.php';
+
 require ROOT . 'inc/session.inc.php';
 
 $retry = $_SESSION['failed attempt'] ?? 0;
 session_regenerate_id( true );
 session_unset();
 $_SESSION['failed attempt'] = ++$retry;
+LOG->notice( 'Logon page loaded', [ 'retries' => $retry ] );
 
 require ROOT . 'inc/header.inc.php';
 ?>
 <main>
 
-	<h1><?=SETTINGS['app']['name']?></h1>
+	<h1>
+		<?= SETTINGS['app']['name'] ?>
+	</h1>
 
 	<dialog open>
 		<h2>Anmeldung</h2>

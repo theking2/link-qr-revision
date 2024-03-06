@@ -61,7 +61,9 @@ if( isset($_POST['action']) ) {
 }
 require_once "../inc/header.inc.php";?>
 <main>
-<h1>go321</h1>
+	<h1>
+		<?= SETTINGS['app']['name'] ?>
+	</h1>
 <dialog open>
   <h2>Password setzen</h2>
   <form method="post" id="form-container">
