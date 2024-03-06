@@ -1,5 +1,9 @@
-<!doctype html>
-<meta charset="utf-8">
+<?php 
+define('SETTINGS_FILE', 'config/settings.ini');
+include 'vendor/kingsoft/utils/settings.inc.php';
+include 'inc/header.inc.php';
+?>
+<main>
 <h1>IMPRESSUM</h1>
 <h2>go321</h2>
 <p>Two things are going on here. We take your url and turn it into something shorter. Second you get a QR code from for this shorter link. As our base URL is really short the QR code is real simple. Think bitly but without the commerce. Something short can be scanned from a far distance. A presentation or something. Also you can change that URL to something else. A bit dodgy, but don't play the rules, we will report to law enforcement if you are evil. We assume you're not.</p>
@@ -20,3 +24,9 @@
 <p>This service is hosted in Switzerland with metanet.ch if you are interested. We do like everyone in the world but not to share data with in multiples datacenters. metanet is green enough to our taste</p>
 <h3>The source</h3>
 <p>In case you are interested our source code is <a href="https://github.com/theking2/link-qr/">here</a>. Feel free to scrutinize and reused it. A note if you do so would be nice</p>
+
+<pre>
+  John King
+  theking2@king.ma
+  Romanshorn, TG, Switzerland
+</main>

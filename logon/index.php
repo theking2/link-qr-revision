@@ -44,7 +44,7 @@ require ROOT . 'inc/header.inc.php';
 			<span></span>
 			<p><a href="register.php">Gratis Konto erstellen!</a></p>
 		</form>
-		<p><a href="../impressum.html">IMPRESSUM</a></p>
+		<p><a href="../impressum.php">IMPRESSUM</a></p>
 	</dialog>
 </main>
 </body>
