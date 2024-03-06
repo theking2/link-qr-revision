@@ -5,9 +5,9 @@ use \Kingsoft\Db\Database;
 define( 'ROOT', $_SERVER['DOCUMENT_ROOT'] . '/' );
 define( 'SETTINGS_FILE', ROOT . 'config/settings.ini' );
 require ROOT . 'vendor/kingsoft/utils/settings.inc.php';
+require ROOT . 'vendor/autooad.php';
 
 require ROOT . 'inc/session.inc.php';
-require ROOT . 'vendor/autoload.php';
 
 $messages = [];
 $email = '';

@@ -3,9 +3,10 @@ namespace LinkQr;
 
 define( 'ROOT', $_SERVER['DOCUMENT_ROOT'] . '/' );
 define( 'SETTINGS_FILE', ROOT . 'config/settings.ini' );
-require ROOT . 'inc/session.inc.php';
 require ROOT . 'vendor/kingsoft/utils/settings.inc.php';
 require ROOT . 'vendor/autoload.php';
+
+require ROOT . 'inc/session.inc.php';
 
 $script = $_POST['script']??$_GET['s']??'';
 /**

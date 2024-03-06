@@ -2,9 +2,9 @@
 define( 'ROOT', $_SERVER['DOCUMENT_ROOT'] . '/' );
 define( 'SETTINGS_FILE', ROOT . 'config/settings.ini' );
 require ROOT . 'vendor/kingsoft/utils/settings.inc.php';
+require ROOT . 'vendor/autoload.php';
 
 require ROOT . 'inc/session.inc.php';
-require ROOT . 'vendor/autoload.php';
 
 const SENDER_EMAIL = 'hostmaster@king.ma';
 const SEND_PWD_TEMPLATE = '<html>

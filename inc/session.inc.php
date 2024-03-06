@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 session_start([
-	'name' => '__Secure-Session-ID',
+	'name' => DEBUG? 'Session-ID': '__Secure-Session-ID',
 	'cookie_lifetime' => 0,
 	'cookie_path' => '/',
 	'cookie_domain' => $_SERVER['HTTP_HOST'],

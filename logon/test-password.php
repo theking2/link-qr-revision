@@ -4,8 +4,9 @@ namespace LinkQr;
 define( 'ROOT', $_SERVER['DOCUMENT_ROOT'] . '/' );
 define( 'SETTINGS_FILE', ROOT . 'config/settings.ini' );
 require ROOT . 'vendor/kingsoft/utils/settings.inc.php';
-require ROOT . 'inc/session.inc.php';
 require ROOT . 'vendor/autoload.php';
+
+require ROOT . 'inc/session.inc.php';
 
 $user = User::find(where: ['username'=> 'theking2']);
 $user-> setPasswordHash('Qr4u2use');

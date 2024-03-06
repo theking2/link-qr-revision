@@ -21,8 +21,9 @@ h1{color:#ff9f35;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-si
 define( 'ROOT', $_SERVER['DOCUMENT_ROOT'] . '/' );
 define( 'SETTINGS_FILE', ROOT . 'config/settings.ini' );
 require ROOT . 'vendor/kingsoft/utils/settings.inc.php';
-require ROOT . 'inc/session.inc.php';
 require ROOT . 'vendor/autoload.php';
+
+require ROOT . 'inc/session.inc.php';
 
 if( \Kingsoft\Utils\Html::check_request_params([ 'vc', 'username' ]) ) {
   header( "Location:." );
