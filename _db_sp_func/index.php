@@ -1,19 +1,24 @@
 <?php declare(strict_types=1);
 
-require "../inc/settings.inc.php";
-require "../inc/connect.inc.php";
+define( 'SETTINGS_FILE', '../config/settings.ini' );
+require '../vendor/kingsoft/utils/settings.inc.php';
+require "../vendor/autoload.php";
+$db = \Kingsoft\Db\Database::getConnection();
+$db->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
 
 function show_routine(string $type, string $name) {
   global $db;
+  if( !is_dir($type) ) {
+    mkdir($type);
+  }
   $query = "SHOW CREATE $type `$name`";
-  $result = $db->query( $query );
-  foreach( $result as $row ) {
+  $stmt = $db->query( $query );
+  foreach( $stmt as $row ) {
     echo "<h1>$name</h1>";
     if( is_null($row["Create $type"]) ) {
       echo "<p>Not found</p>";
       continue;
     }
-    $proc   = $row[$type];
     $source = $row["Create $type"];
     $source = preg_replace( "/(DEFINER=`\w*`@`\w*`)/", "/* $1 */", $source );
     echo "<pre>$source</pre>";
@@ -26,14 +31,14 @@ function show_routine(string $type, string $name) {
   }
 }
 
-
-foreach( $db->query("show procedure status where db = 'minidwh'") as $row ) {
+$stmt = $db->query("show procedure status where db = '".SETTINGS['db']['database']."'");
+foreach( $stmt as $row ) {
   $name = $row["Name"];
   show_routine("Procedure", $name);
 }
 
-
-foreach( $db->query("show function status where db = 'minidwh'") as $row ) {
+$stmt = $db->query("show function status where db = '".SETTINGS['db']['database']."'");
+foreach( $stmt as $row) {
   $name = $row["Name"];
   show_routine("Function", $name);
 }
