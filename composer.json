@@ -4,12 +4,14 @@
         "kingsoft/utils": "^2.7",
         "kingsoft/db": "^2.7",
         "kingsoft/persist-db": "^2.7",
-        "kingsoft/persist-rest": "^1.2",
-        "kingsoft/monolog-handler": "^1.0"
+        "kingsoft/http": "^2.7",
+        "kingsoft/monolog-handler": "^1.0",
+        "kingsoft/persist": "^3.1"
     },
     "autoload": {
         "psr-4": {
-            "LinkQr\\": "./classes/LinkQr",
+            "LinkQr\\": "./classes/LinkQr"
         }
     }
+
 }
