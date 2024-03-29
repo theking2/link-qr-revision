@@ -37,4 +37,35 @@ final class User
 			'last_login'         => ['\DateTime', 0 ],
 		];
 	}
+  public function __toString()
+  {
+    return sprintf( '%s [%s %s]',
+      $this->username, $this-> vorname, $this-> nachname
+    );
+  }
+
+  /**
+   * Have the database create a new UUID for this user
+   * @return bool
+   */
+  public function createUUID()
+  {
+    $this-> __set( 'uuid', base64url_encode(random_bytes(48)) );
+  }
+  /**
+   * Set the hash for this user's password
+   */
+  public function setPasswordHash(string $password) {
+    // use the setter to mark as dirty
+    $this-> __set('hash', password_hash($password, PASSWORD_ARGON2ID) );
+  }
+  /**
+   * Check the password against the hash or to the old style password
+   */
+  public function checkPassword(?string $password): bool
+  {
+    return password_verify($password, $this->hash);
+  }
+
+	
 }
