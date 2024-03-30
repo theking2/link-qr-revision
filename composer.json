@@ -6,7 +6,7 @@
         "kingsoft/persist-db": "^2.7",
         "kingsoft/http": "^2.7",
         "kingsoft/monolog-handler": "^1.0",
-        "kingsoft/persist": "^3.1"
+        "kingsoft/persist": "^3.2"
     },
     "autoload": {
         "psr-4": {
