@@ -2,11 +2,41 @@
 define( 'SETTINGS_FILE', './config/settings.ini' );
 require './vendor/kingsoft/utils/settings.inc.php';
 require './vendor/autoload.php';
-use Kingsoft\Db\Database;
+require './inc/logger.inc.php';
+use Kingsoft\Db\{Database, DatabaseException};
+use Kingsoft\Utils\Html;
+
+try{
+	$db = Database::getConnection();
+} catch( DatabaseException $e ) {
+	header( "HTTP/1.1 500 Internal Server Error" );
+	trigger_error( $e->getMessage(), E_USER_ERROR );
+	exit( '<h1>500 Internal Server Error' );
+}
 
 if( array_key_exists( 'code', $_GET ) ) {
+	//check if last character is a '+' and if so return url information
+	// $_GET strips the '+' so we have to check the original request uri
+	if( substr( $_SERVER['REQUEST_URI'], -1 ) === '+' ) {
+		$select = $db->prepare( 'select get_url(:code)' );
+		try {
+			if( $select->execute( [ 'code' => $_GET['code'] ] ) && ( $url = $select->fetchColumn() ) ) {
+				$select = null;
+				header( 'Content-Type: application/json' );
+				echo json_encode( [ 'url' => $url ] );
+				exit();
+			} else {
+				header( "HTTP/1.1 404 Not Found" );
+				exit( '<h1>404 Not Found' );
+			}
+		} catch ( PDOException $e ) {
+			header( "HTTP/1.1 500 Internal Server Error" );
+			exit( '<h1>500 Internal Server Error' );
+		}
+	}
 
-	$select = Database::getConnection()->prepare( 'select get_url(:code)' );
+
+	$select = $db->prepare( 'select get_url(:code)' );
 	try {
 		if( $select->execute( [ 'code' => $_GET['code'] ] ) && ( $url = $select->fetchColumn() ) ) {
 			$select = null;
@@ -29,7 +59,6 @@ if( array_key_exists( 'code', $_GET ) ) {
  * If we are here there was no code in the GET array
  * so we are going to show the main page
  */
-use \Kingsoft\Utils\Html;
 
 define( 'BASE_URL',
 	( ( array_key_exists( 'HTTPS', $_SERVER ) ) ? 'https://' : 'http://' ) .
@@ -55,7 +84,7 @@ if( array_key_exists( 'url', $_GET ) and ( false === strpos( $_GET['url'], BASE_
 		// save full_url for name of the svg file
 		$full_url = $url;
 
-		$select = Database::getConnection()->prepare( 'select set_url(:user_id, :url)' );
+		$select = $db->prepare( 'select set_url(:user_id, :url)' );
 		$select->execute( [ 'url' => $full_url, 'user_id' => $_SESSION['user_id'] ] );
 
 		if( $code = $select->fetchColumn() ) {
@@ -70,8 +99,7 @@ if( array_key_exists( 'url', $_GET ) and ( false === strpos( $_GET['url'], BASE_
 }
 //var_dump($_GET);
 
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="de">
 
 <head>
@@ -80,6 +108,7 @@ if( array_key_exists( 'url', $_GET ) and ( false === strpos( $_GET['url'], BASE_
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="./lib/qrcode.js" defer></script>
 	<link rel="stylesheet" href="./assets/main.css">
+	<link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
