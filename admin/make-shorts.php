@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
-require_once 'inc/utils.inc.php';
-require_once 'inc/settings.inc.php';
+define( 'SETTINGS_FILE', '../config/settings.ini' );
+require '../vendor/kingsoft/utils/settings.inc.php';
+require '../vendor/autoload.php';
+require '../inc/logger.inc.php';
 // Allow these characters
 $charset ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNAOPQRSTUVWXYZ1234567890-_.!~*'()";
 
@@ -19,8 +21,7 @@ function getCode(): string {
   return $result;
 }
 
-require_once 'inc/connect.inc.php';
-$insert = $db-> prepare("
+$insert = \Kingsoft\Db\Database::getConnection()-> prepare("
 insert into
     code( code,  url,  last_used, hits)
   values(:code, null, '0000-00-00', default)");
@@ -29,6 +30,7 @@ $insert->bindParam(':code',$code);
 
 for($i=1000; $i>0; $i--) {
   $code = getCode();
-  $insert-> execute() or die($insert->errorInfo()[2]);
+  LOG->debug("Adding code $code");
+  $insert-> execute() or trigger_error($insert->errorInfo()[2], E_USER_ERROR);
 }
-echo $code;
+echo 'codes created';
