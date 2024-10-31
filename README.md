@@ -1,5 +1,5 @@
 # link-qr-revision
-# link-qr revisited
+
 # Config
 Create a file `app.conf` with this content
 ```
